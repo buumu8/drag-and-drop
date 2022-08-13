@@ -71,7 +71,13 @@ function createItemEl(columnEl, column, item, index) {
   listEl.textContent = item;
   listEl.draggable = true;
   listEl.setAttribute("ondragstart", "drag(event)");
+  // Editable on Double Click
+  listEl.setAttribute("title", "Double Click to Edit.");
   listEl.setAttribute("ondblclick", `this.contentEditable=true;`);
+  listEl.setAttribute(
+    "onkeydown",
+    `onEditPressEnter(event,${index},${column})`
+  );
   // listEl.contentEditable = true;
   listEl.id = index;
   listEl.setAttribute("onfocusout", `updateItem(${index},${column})`);
@@ -112,6 +118,13 @@ function updateDOM() {
   // Run getSavedColumns only once, Update Local Storage
   updatedOnLoad = true;
   updateSavedColumns();
+}
+
+// Update on Press Enter
+function onEditPressEnter(event, id, column) {
+  if (event.keyCode === 13) {
+    updateItem(id, column);
+  }
 }
 
 // Update Item - Delete if necessary, or update Array value
@@ -188,7 +201,7 @@ function dragEnter(column) {
 function dragLeave(column) {
   setTimeout(() => {
     listColumns[column].classList.remove("over");
-  }, 2000);
+  }, 1000);
 }
 
 // Column Allows for Item to Drop

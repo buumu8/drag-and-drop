@@ -123,6 +123,8 @@ ul {
 /* Drag and Drop */
 .over {
   padding: 50px 10px;
+
+  transition: background 1s ease-in 0s;
 }
 
 .drag-item-list {
