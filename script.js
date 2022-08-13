@@ -188,7 +188,7 @@ function dragEnter(column) {
 function dragLeave(column) {
   setTimeout(() => {
     listColumns[column].classList.remove("over");
-  }, 4000);
+  }, 2000);
 }
 
 // Column Allows for Item to Drop
